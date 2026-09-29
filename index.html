@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VICTIM 2v2 LEAGUE - CS2</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Teko:wght@600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-main: #0a0a0c;
+            --bg-card: #121218;
+            --bg-card-hover: #1a1a24;
+            --accent-red: #ff2a3b;
+            --accent-red-glow: rgba(255, 42, 59, 0.35);
+            --text-main: #ffffff;
+            --text-muted: #9a9ab0;
+            --border-color: rgba(255, 42, 59, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(255, 42, 59, 0.12) 0%, transparent 60%),
+                radial-gradient(circle at 100% 100%, rgba(255, 42, 59, 0.05) 0%, transparent 50%);
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        header {
+            background: rgba(18, 18, 24, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-family: 'Teko', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #fff;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-shadow: 0 0 10px var(--accent-red-glow);
+        }
+
+        .logo span { color: var(--accent-red); }
+        .logo i { color: var(--accent-red); }
+
+        nav {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-muted);
+            padding: 10px 18px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover {
+            color: var(--text-main);
+            border-color: rgba(255, 42, 59, 0.4);
+            background: rgba(255, 42, 59, 0.05);
+        }
+
+        .nav-btn.active {
+            color: var(--text-main);
+            background: var(--accent-red);
+            border-color: var(--accent-red);
+            box-shadow: 0 0 15px var(--accent-red-glow);
+        }
+
+        /* --- HERO BANNER --- */
+        .hero {
+            text-align: center;
+            padding: 50px 20px 30px;
+            background: linear-gradient(180deg, rgba(255, 42, 59, 0.08) 0%, transparent 100%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .hero h1 {
+            font-family: 'Teko', sans-serif;
+            font-size: 3.5rem;
+            line-height: 1;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px var(--accent-red-glow);
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- MAIN CONTENT --- */
+        main {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+            flex: 1;
+            width: 100%;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out forwards;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- CARDS & GRID --- */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-title {
+            font-family: 'Teko', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+            color: var(--accent-red);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid rgba(255, 42, 59, 0.15);
+            padding-bottom: 8px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        /* --- MAPS TAB STYLES --- */
+        .map-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+            padding: 30px 20px;
+            text-decoration: none;
+            display: block;
+            cursor: pointer;
+        }
+
+        .map-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-red);
+            box-shadow: 0 5px 20px var(--accent-red-glow);
+        }
+
+        .map-icon {
+            font-size: 2.5rem;
+            color: var(--accent-red);
+            margin-bottom: 15px;
+        }
+
+        .map-name {
+            font-family: 'Teko', sans-serif;
+            font-size: 2.2rem;
+            color: #fff;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .map-tag {
+            display: inline-block;
+            background: rgba(255, 42, 59, 0.15);
+            color: var(--accent-red);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .map-link-text {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+
+        .map-card:hover .map-link-text {
+            color: #fff;
+        }
+
+        /* --- TABELA STYLES --- */
+        .search-box {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 12px 20px 12px 45px;
+            color: #fff;
+            font-size: 1rem;
+            border-radius: 6px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .search-box input:focus {
+            border-color: var(--accent-red);
+            box-shadow: 0 0 10px var(--accent-red-glow);
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th {
+            background: rgba(255, 42, 59, 0.1);
+            color: var(--accent-red);
+            padding: 15px;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 1.05rem;
+            vertical-align: middle;
+        }
+
+        tr:hover {
+            background: var(--bg-card-hover);
+        }
+
+        .pos { font-weight: 700; width: 50px; text-align: center; }
+        .pos-1 { color: #ffd700; font-size: 1.2rem; }
+        .pos-2 { color: #c0c0c0; font-size: 1.2rem; }
+        .pos-3 { color: #cd7f32; font-size: 1.2rem; }
+
+        .team-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+        }
+
+        .team-logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid var(--border-color);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .pts { color: var(--accent-red); font-weight: 700; }
+
+        /* --- REGULAMIN STYLES --- */
+        .rules-list {
+            list-style: none;
+        }
+
+        .rules-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .rules-list li::before {
+            content: "•";
+            color: var(--accent-red);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: var(--accent-red);
+            color: #fff;
+            font-family: 'Teko', sans-serif;
+            font-size: 1.2rem;
+            padding: 2px 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .banner-motto {
+            background: linear-gradient(90deg, rgba(255, 42, 59, 0.2) 0%, rgba(255, 42, 59, 0.05) 100%);
+            border-left: 4px solid var(--accent-red);
+            padding: 20px;
+            border-radius: 4px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .banner-motto h3 {
+            font-family: 'Teko', sans-serif;
+            font-size: 2rem;
+            color: #fff;
+            letter-spacing: 2px;
+        }
+
+        .banner-motto p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-top: 5px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            padding: 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+
+        @media (max-width: 768px) {
+            .header-container { flex-direction: column; gap: 15px; }
+            .hero h1 { font-size: 2.5rem; }
+            nav { width: 100%; justify-content: center; }
+            .nav-btn { padding: 8px 12px; font-size: 0.95rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fa-solid fa-crosshairs"></i>
+                VICTIM <span>2V2 LEAGUE</span>
+            </div>
+            <nav>
+                <button class="nav-btn active" onclick="switchTab(event, 'o-lidze')">
+                    <i class="fa-solid fa-info-circle"></i> O Lidze
+                </button>
+                <button class="nav-btn" onclick="switchTab(event, 'tabela')">
+                    <i class="fa-solid fa-trophy"></i> Tabela
+                </button>
+                <button class="nav-btn" onclick="switchTab(event, 'mapy')">
+                    <i class="fa-solid fa-map"></i> Mapy
+                </button>
+                <button class="nav-btn" onclick="switchTab(event, 'regulamin')">
+                    <i class="fa-solid fa-book"></i> Regulamin
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO BANNER -->
+    <section class="hero">
+        <h1>COUNTER-STRIKE 2 // VICTIM 2V2</h1>
+        <p>TWO PLAYERS. ONE TEAM. ONE GOAL.</p>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <main>
+
+        <!-- ZAKŁADKA: O LIDZE -->
+        <div id="o-lidze" class="tab-content active">
+            <div class="card">
+                <h2 class="card-title"><i class="fa-solid fa-shield-halved"></i> VICTIM 2v2 LEAGUE</h2>
+                <p style="color: var(--text-muted); line-height: 1.6; font-size: 1.1rem;">
+                    VICTIM 2v2 League to amatorska liga stworzona dla graczy Counter-Strike 2, którzy chcą sprawdzić swoje umiejętności w trybie Wingman 2v2, rywalizować z innymi zawodnikami i przede wszystkim dobrze się bawić w duchu esportowej rywalizacji.
+                </p>
+                <br>
+                <p style="color: var(--text-muted); line-height: 1.6; font-size: 1.1rem;">
+                    Liga powstała z myślą o stworzeniu miejsca, w którym każdy może spróbować swoich sił w rywalizacji — niezależnie od poziomu doświadczenia. Liczą się współpraca, komunikacja, taktyka, indywidualne umiejętności oraz chęć rywalizacji.
+                </p>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h2 class="card-title"><i class="fa-solid fa-gamepad"></i> FORMAT</h2>
+                    <p style="color: var(--text-muted); line-height: 1.6;">
+                        VICTIM 2v2 League rozgrywana jest w formule 2 na 2, w trybie Wingman.<br><br>
+                        Każdy mecz to bezpośrednia rywalizacja dwóch dwuosobowych zespołów. Zawodnicy muszą wykazać się nie tylko aimem, ale również odpowiednim wykorzystaniem granatów, znajomością map, komunikacją i umiejętnością podejmowania decyzji pod presją.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title"><i class="fa-solid fa-bullseye"></i> CEL LIGI</h2>
+                    <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 10px;">
+                        Celem ligi jest stworzenie regularnej i aktywnej rywalizacji dla społeczności VICTIM oraz wszystkich zainteresowanych graczy.<br><br>
+                        Chcemy, aby VICTIM 2v2 League była miejscem, gdzie:
+                    </p>
+                    <ul class="rules-list">
+                        <li>można regularnie rywalizować z innymi drużynami,</li>
+                        <li>można sprawdzić swoje umiejętności w praktyce,</li>
+                        <li>można poznać nowych graczy,</li>
+                        <li>można rozwijać komunikację i grę zespołową,</li>
+                        <li>można walczyć o zwycięstwo i prestiż w lidze.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h2 class="card-title"><i class="fa-solid fa-chart-simple"></i> TABELA I WYNIKI</h2>
+                    <p style="color: var(--text-muted); line-height: 1.6;">
+                        Wyniki spotkań będą regularnie aktualizowane, a najważniejsze mecze i rezultaty będą publikowane na serwerze.<br><br>
+                        Na podstawie wyników prowadzona będzie tabela ligi, dzięki której każdy będzie mógł śledzić sytuację swojej drużyny oraz walkę o najwyższe miejsca.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title"><i class="fa-solid fa-users"></i> SPOŁECZNOŚĆ</h2>
+                    <p style="color: var(--text-muted); line-height: 1.6;">
+                        VICTIM 2v2 League to nie tylko same mecze.<br><br>
+                        Discord ligi jest miejscem do komunikacji zawodników, organizacji spotkań, publikowania wyników, informacji o rozgrywkach oraz wspólnej integracji społeczności Counter-Strike.<br><br>
+                        <strong>Dołącz, znajdź partnera, stwórz duet i pokaż, na co Cię stać.</strong>
+                    </p>
+                </div>
+            </div>
+
+            <div class="banner-motto">
+                <h3>VICTIM 2v2 LEAGUE</h3>
+                <p><strong>TWO PLAYERS. ONE TEAM. ONE GOAL.</strong></p>
+                <p style="color: var(--accent-red); margin-top: 5px;">Witamy na serwerze. Powodzenia na serwerach! 🎮🏆</p>
+            </div>
+        </div>
+
+        <!-- ZAKŁADKA: TABELA -->
+        <div id="tabela" class="tab-content">
+            <div class="card">
+                <h2 class="card-title"><i class="fa-solid fa-list-ol"></i> Tabela Ligowa</h2>
+                
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="teamSearch" onkeyup="filterTeams()" placeholder="Szukaj drużyny...">
+                </div>
+
+                <div class="table-responsive">
+                    <table id="teamsTable">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center;">#</th>
+                                <th>Drużyna</th>
+                                <th style="text-align: center;">Mecze</th>
+                                <th style="text-align: center;">W</th>
+                                <th style="text-align: center;">P</th>
+                                <th style="text-align: center;">Bilans Rund</th>
+                                <th style="text-align: center;">Pkt</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="pos pos-1"><i class="fa-solid fa-crown"></i> 1</td>
+                                <td>
+                                    <div class="team-info">
+                                        <img src="images/koniobijcy.jpg" alt="Koniobijcy" class="team-logo">
+                                        <span>Koniobijcy</span>
+                                    </div>
+                                </td>
+                                <td style="text-align: center;">0</td>
+                                <td style="text-align: center;">0</td>
+                                <td style="text-align: center;">0</td>
+                                <td style="text-align: center;">0</td>
+                                <td class="pts" style="text-align: center;">0</td>
+                            </tr>
+                            <tr>
+                                <td class="pos pos-2">2</td>
+                                <td>
+                                    <div class="team-info">
+                                        <img src="images/tutusie.jpg" alt="Tutusie" class="team-logo">
+                                        <span>Tutusie</span>
+                                    </div>
+                                </td>
+                                <td style="text-align: center;">0</td>
+                                <td style="text-align: center;">0</td>
+                                <td style="text-align: center;">0</td>
+                                <td style="text-align: center;">0</td>
+                                <td class="pts" style="text-align: center;">0</td>
+                            </tr>
+                            <tr>
+                                <td class="pos pos-3">3</td>
+                                <td>
+                                    <div class="team-info">
+                                        <img src="images/zypiekanka.jpg" alt="Żypiekanka" class="team-logo">
+                                        <span>Żypiekanka</span>
+                                    </div>
+                                </td>
+                                <td style="text-align: center;">0</td>
+                                <td style="text-align: center;">0</td>
+                                <td style="text-align: center;">0</td>
+                                <td style="text-align: center;">0</td>
+                                <td class="pts" style="text-align: center;">0</td>
+                            </tr>
+                            <tr>
+                                <td class="pos">4</td>
+                                <td>
+                                    <div class="team-info">
+                                        <img src="images/vendetta.jpg" alt="Vendetta" class="team-logo">
+                                        <span>Vendetta</span>
+                                    </div>
+                                </td>
+                                <td style="text-align: center;">0</td>
+                                <td style="text-align: center;">0</td>
+                                <td style="text-align: center;">0</td>
+                                <td style="text-align: center;">0</td>
+                                <td class="pts" style="text-align: center;">0</td>
+                            </tr>
+                            <tr>
+                                <td class="pos">5</td>
+                                <td>
+                                    <div class="team-info">
+                                        <img src="images/chlopaki_z_premki.png" alt="Chłopaki z premki" class="team-logo">
+                                        <span>Chłopaki z premki</span>
+                                    </div>
+                                </td>
+                                <td style="text-align: center;">0</td>
+                                <td style="text-align: center;">0</td>
+                                <td style="text-align: center;">0</td>
+                                <td style="text-align: center;">0</td>
+                                <td class="pts" style="text-align: center;">0</td>
+                            </tr>
+                            <tr>
+                                <td class="pos">6</td>
+                                <td>
+                                    <div class="team-info">
+                                        <img src="images/podopieczni.jpg" alt="Podopieczni" class="team-logo">
+                                        <span>Podopieczni</span>
+                                    </div>
+                                </td>
+                                <td style="text-align: center;">0</td>
+                                <td style="text-align: center;">0</td>
+                                <td style="text-align: center;">0</td>
+                                <td style="text-align: center;">0</td>
+                                <td class="pts" style="text-align: center;">0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ZAKŁADKA: MAPY -->
+        <div id="mapy" class="tab-content">
+            <div class="card">
+                <h2 class="card-title"><i class="fa-solid fa-map-location-dot"></i> Pula Map (Map Pool)</h2>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">
+                    Oficjalna pula map obowiązująca w trakcie rozgrywek VICTIM 2v2 League. Kliknij w wybraną mapę, aby przejść do jej opisu na CS2 Wiki.
+                </p>
+                <div class="grid-4">
+                    <a href="https://counterstrike.fandom.com/wiki/Overpass" target="_blank" class="map-card">
+                        <i class="fa-solid fa-monument map-icon"></i>
+                        <div class="map-name">OVERPASS</div>
+                        <span class="map-tag">Wingman 2v2</span>
+                        <span class="map-link-text"><i class="fa-solid fa-external-link-alt"></i> Zobacz na CS Wiki</span>
+                    </a>
+                    <a href="https://counterstrike.fandom.com/wiki/Vertigo" target="_blank" class="map-card">
+                        <i class="fa-solid fa-city map-icon"></i>
+                        <div class="map-name">VERTIGO</div>
+                        <span class="map-tag">Wingman 2v2</span>
+                        <span class="map-link-text"><i class="fa-solid fa-external-link-alt"></i> Zobacz na CS Wiki</span>
+                    </a>
+                    <a href="https://counterstrike.fandom.com/wiki/Nuke" target="_blank" class="map-card">
+                        <i class="fa-solid fa-radiation map-icon"></i>
+                        <div class="map-name">NUKE</div>
+                        <span class="map-tag">Wingman 2v2</span>
+                        <span class="map-link-text"><i class="fa-solid fa-external-link-alt"></i> Zobacz na CS Wiki</span>
+                    </a>
+                    <a href="https://counterstrike.fandom.com/wiki/Inferno" target="_blank" class="map-card">
+                        <i class="fa-solid fa-fire map-icon"></i>
+                        <div class="map-name">INFERNO</div>
+                        <span class="map-tag">Wingman 2v2</span>
+                        <span class="map-link-text"><i class="fa-solid fa-external-link-alt"></i> Zobacz na CS Wiki</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ZAKŁADKA: REGULAMIN -->
+        <div id="regulamin" class="tab-content">
+            <div class="card">
+                <h2 class="card-title"><i class="fa-solid fa-gavel"></i> REGULAMIN VICTIM 2v2 LEAGUE</h2>
+                <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">
+                    VICTIM 2v2 League to amatorska liga Counter-Strike 2 rozgrywana w formule 2v2 Wingman. Celem rozgrywek jest zapewnienie uczciwej, aktywnej i przyjemnej rywalizacji dla wszystkich uczestników. Dołączenie do ligi oznacza akceptację poniższego regulaminu.
+                </p>
+
+                <!-- PARAGRAFY REGULAMINU -->
+                <div style="display: flex; flex-direction: column; gap: 15px;">
+                    <div>
+                        <span class="section-badge">§1. POSTANOWIENIA OGÓLNE</span>
+                        <ul class="rules-list">
+                            <li>Organizatorem VICTIM 2v2 League jest organizacja VICTIM.</li>
+                            <li>Udział w lidze jest przeznaczony dla osób posiadających konto Counter-Strike 2 oraz możliwość rozgrywania meczów w trybie Wingman.</li>
+                            <li>Każda drużyna składa się z 2 zawodników.</li>
+                            <li>Każdy zawodnik może reprezentować w danym momencie tylko jeden skład w ramach konkretnej edycji ligi.</li>
+                            <li>Organizator ma prawo interpretować regulamin oraz podejmować decyzje w sytuacjach, których regulamin nie opisuje bezpośrednio.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <span class="section-badge">§2. ZGŁOSZENIE DRUŻYNY</span>
+                        <ul class="rules-list">
+                            <li>Drużyna zgłaszana jest przez podanie: nazwy drużyny, nicku pierwszego zawodnika, nicku drugiego zawodnika, ewentualnego kontaktu do kapitana.</li>
+                            <li>Po zaakceptowaniu zgłoszenia skład zostaje wpisany do rozgrywek.</li>
+                            <li>Zawodnicy zobowiązani są do korzystania z właściwych kont Steam/Counter-Strike podczas spotkań.</li>
+                            <li>Podszywanie się pod innego zawodnika jest zabronione.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <span class="section-badge">§3. MECZE</span>
+                        <ul class="rules-list">
+                            <li>Wszystkie spotkania rozgrywane są w trybie Wingman 2v2.</li>
+                            <li>Terminy spotkań ustalane są przez organizatora lub bezpośrednio przez zainteresowane drużyny zgodnie z harmonogramem ligi.</li>
+                            <li>Drużyny zobowiązane są pojawić się na serwerze o ustalonej godzinie.</li>
+                            <li>Zaleca się, aby zawodnicy byli gotowi do rozpoczęcia meczu minimum 10 minut przed wyznaczonym terminem.</li>
+                            <li>W przypadku problemów technicznych należy niezwłocznie poinformować przeciwnika oraz organizatora.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <span class="section-badge">§4. WYBÓR MAPY I BANOWANIE</span>
+                        <ul class="rules-list">
+                            <li>Mapa meczu ustalana jest poprzez procedurę banowania/właściwy system wskazany przez organizatora.</li>
+                            <li>Każda drużyna ma prawo do udziału w procesie wyboru oraz banowania map.</li>
+                            <li>Po rozpoczęciu spotkania wybrana mapa nie może zostać zmieniona, chyba że organizator podejmie inną decyzję z powodu problemów technicznych lub organizacyjnych.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <span class="section-badge">§5. WYNIK MECZU</span>
+                        <ul class="rules-list">
+                            <li>Po zakończeniu spotkania obie drużyny zobowiązane są potwierdzić wynik.</li>
+                            <li>Wynik może zostać zgłoszony organizatorowi poprzez odpowiedni kanał na Discordzie.</li>
+                            <li>W przypadku sporu dotyczącego wyniku organizator może poprosić o: screenshot wyniku, nagranie meczu, demo, inne materiały potwierdzające przebieg spotkania.</li>
+                            <li>Organizator ma prawo anulować wynik lub zarządzić ponowne rozegranie spotkania, jeżeli wystąpią uzasadnione problemy organizacyjne lub techniczne.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <span class="section-badge">§6. WALKOWER</span>
+                        <ul class="rules-list">
+                            <li>Drużyna, która nie pojawi się na ustalonym meczu bez wcześniejszego poinformowania przeciwnika, może otrzymać walkower.</li>
+                            <li>Notoryczne przekładanie spotkań lub unikanie rozegrania meczu może skutkować walkowerem lub usunięciem drużyny z ligi.</li>
+                            <li>W przypadku problemów z ustaleniem terminu należy skontaktować się z organizatorem.</li>
+                            <li>Organizator rozpatruje sytuacje związane z nieobecnością indywidualnie, biorąc pod uwagę okoliczności.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <span class="section-badge">§7. ZMIANY ZAWODNIKÓW</span>
+                        <ul class="rules-list">
+                            <li>Ewentualne zmiany zawodników muszą zostać zgłoszone organizatorowi.</li>
+                            <li>Organizator może zezwolić na zmianę zawodnika w uzasadnionych przypadkach.</li>
+                            <li>Nowy zawodnik nie może reprezentować jednocześnie dwóch drużyn w tej samej edycji ligi.</li>
+                            <li>Wykorzystanie niezgłoszonego zawodnika może skutkować walkowerem.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <span class="section-badge">§8. UCZCIWA GRA</span>
+                        <ul class="rules-list">
+                            <li>Zabronione jest korzystanie z jakiegokolwiek oprogramowania lub rozwiązania dającego nieuczciwą przewagę nad przeciwnikiem (cheaty, wallhacki, aimboty, triggerboty, niedozwolone skrypty, exploity).</li>
+                            <li>Wykorzystywanie błędów gry w celu uzyskania przewagi może zostać ukarane decyzją organizatora.</li>
+                            <li>W przypadku uzasadnionego podejrzenia oszustwa organizator może poprosić zawodnika o przedstawienie odpowiednich materiałów lub wyjaśnień.</li>
+                            <li>Udowodnione oszustwo może skutkować natychmiastowym usunięciem zawodnika i/lub drużyny z ligi.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <span class="section-badge">§9. ZACHOWANIE ZAWODNIKÓW</span>
+                        <ul class="rules-list">
+                            <li>Wszyscy uczestnicy zobowiązani są do zachowania kultury osobistej.</li>
+                            <li>Zabronione są: celowe obrażanie przeciwników, groźby, spamowanie, prowokowanie, rasistowskie lub dyskryminujące wypowiedzi.</li>
+                            <li>Organizator może nałożyć karę za niesportowe zachowanie, włącznie z usunięciem zawodnika lub drużyny.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <span class="section-badge">§10. DC / PROBLEMY TECHNICZNE</span>
+                        <ul class="rules-list">
+                            <li>W przypadku rozłączenia zawodnika podczas meczu drużyna powinna możliwie szybko ponownie dołączyć do rozgrywki.</li>
+                            <li>Krótkotrwałe problemy techniczne nie oznaczają automatycznego anulowania meczu.</li>
+                            <li>Jeżeli problem techniczny znacząco wpłynął na przebieg spotkania, organizator może podjąć decyzję o jego powtórzeniu.</li>
+                            <li>Celowe opuszczenie meczu w celu uniknięcia porażki może zostać potraktowane jako niesportowe zachowanie.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <span class="section-badge">§11. STREAMOWANIE I NAGRYWANIE</span>
+                        <ul class="rules-list">
+                            <li>Zawodnicy mogą streamować oraz nagrywać swoje mecze.</li>
+                            <li>Zabronione jest wykorzystywanie transmisji przeciwnika do uzyskania informacji o jego pozycji lub działaniach (stream sniping).</li>
+                            <li>Organizator może wykorzystywać wyniki, screenshoty oraz materiały z meczów do publikacji na kanałach VICTIM.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <span class="section-badge">§12. KARY</span>
+                        <ul class="rules-list">
+                            <li>🟨 Ostrzeżenie</li>
+                            <li>🟧 Walkower</li>
+                            <li>🟥 Dyskwalifikacja zawodnika</li>
+                            <li>⛔ Dyskwalifikacja drużyny</li>
+                            <li>🚫 Zakaz udziału w kolejnych rozgrywkach VICTIM</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <span class="section-badge">§13. ODWOŁANIA I SPORY</span>
+                        <ul class="rules-list">
+                            <li>Wszelkie spory należy zgłaszać administracji VICTIM z dokładnym opisem sytuacji oraz dowodami.</li>
+                            <li>Ostateczna decyzja w sprawach dotyczących regulaminu i rozgrywek należy do organizatora.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <span class="section-badge">§14. POSTANOWIENIA KOŃCOWE</span>
+                        <ul class="rules-list">
+                            <li>Organizator zastrzega sobie możliwość zmiany regulaminu w trakcie trwania ligi. O zmianach uczestnicy zostaną poinformowani na serwerze Discord.</li>
+                            <li>Nieznajomość regulaminu nie zwalnia z obowiązku jego przestrzegania.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 VICTIM 2v2 LEAGUE. Wszelkie prawa zastrzeżone.</p>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        function switchTab(event, tabId) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        function filterTeams() {
+            const input = document.getElementById("teamSearch");
+            const filter = input.value.toUpperCase();
+            const table = document.getElementById("teamsTable");
+            const tr = table.getElementsByTagName("tr");
+
+            for (let i = 1; i < tr.length; i++) {
+                const td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                    const txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
