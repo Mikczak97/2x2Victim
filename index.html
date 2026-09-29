@@ -179,9 +179,22 @@
             margin-bottom: 15px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: space-between;
             border-bottom: 1px solid rgba(255, 42, 59, 0.15);
             padding-bottom: 8px;
+        }
+
+        .card-title-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .update-info {
+            font-size: 0.9rem;
+            font-family: 'Rajdhani', sans-serif;
+            color: var(--text-muted);
+            font-weight: 500;
         }
 
         .grid-2 {
@@ -304,6 +317,19 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             border-bottom: 2px solid var(--border-color);
+            text-align: left;
+        }
+
+        th:last-child, td:last-child,
+        th:nth-last-child(2), td:nth-last-child(2),
+        th:nth-last-child(3), td:nth-last-child(3),
+        th:nth-last-child(4), td:nth-last-child(4) {
+            text-align: center;
+        }
+
+        th:first-child, td:first-child {
+            text-align: center !important;
+            width: 50px;
         }
 
         td {
@@ -311,6 +337,7 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             font-size: 1.05rem;
             vertical-align: middle;
+            text-align: left;
         }
 
         tr:hover {
@@ -412,6 +439,7 @@
             .hero h1 { font-size: 2.5rem; }
             nav { width: 100%; justify-content: center; }
             .nav-btn { padding: 8px 12px; font-size: 0.95rem; }
+            .card-title { flex-direction: column; align-items: flex-start; gap: 5px; }
         }
     </style>
 </head>
@@ -453,7 +481,9 @@
         <!-- ZAKŁADKA: O LIDZE -->
         <div id="o-lidze" class="tab-content active">
             <div class="card">
-                <h2 class="card-title"><i class="fa-solid fa-shield-halved"></i> VICTIM 2v2 LEAGUE</h2>
+                <h2 class="card-title">
+                    <div class="card-title-content"><i class="fa-solid fa-shield-halved"></i> VICTIM 2v2 LEAGUE</div>
+                </h2>
                 <p style="color: var(--text-muted); line-height: 1.6; font-size: 1.1rem;">
                     VICTIM 2v2 League to amatorska liga stworzona dla graczy Counter-Strike 2, którzy chcą sprawdzić swoje umiejętności w trybie Wingman 2v2, rywalizować z innymi zawodnikami i przede wszystkim dobrze się bawić w duchu esportowej rywalizacji.
                 </p>
@@ -465,7 +495,9 @@
 
             <div class="grid-2">
                 <div class="card">
-                    <h2 class="card-title"><i class="fa-solid fa-gamepad"></i> FORMAT</h2>
+                    <h2 class="card-title">
+                        <div class="card-title-content"><i class="fa-solid fa-gamepad"></i> FORMAT</div>
+                    </h2>
                     <p style="color: var(--text-muted); line-height: 1.6;">
                         VICTIM 2v2 League rozgrywana jest w formule 2 na 2, w trybie Wingman.<br><br>
                         Każdy mecz to bezpośrednia rywalizacja dwóch dwuosobowych zespołów. Zawodnicy muszą wykazać się nie tylko aimem, ale również odpowiednim wykorzystaniem granatów, znajomością map, komunikacją i umiejętnością podejmowania decyzji pod presją.
@@ -473,7 +505,9 @@
                 </div>
 
                 <div class="card">
-                    <h2 class="card-title"><i class="fa-solid fa-bullseye"></i> CEL LIGI</h2>
+                    <h2 class="card-title">
+                        <div class="card-title-content"><i class="fa-solid fa-bullseye"></i> CEL LIGI</div>
+                    </h2>
                     <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 10px;">
                         Celem ligi jest stworzenie regularnej i aktywnej rywalizacji dla społeczności VICTIM oraz wszystkich zainteresowanych graczy.<br><br>
                         Chcemy, aby VICTIM 2v2 League była miejscem, gdzie:
@@ -490,7 +524,9 @@
 
             <div class="grid-2">
                 <div class="card">
-                    <h2 class="card-title"><i class="fa-solid fa-chart-simple"></i> TABELA I WYNIKI</h2>
+                    <h2 class="card-title">
+                        <div class="card-title-content"><i class="fa-solid fa-chart-simple"></i> TABELA I WYNIKI</div>
+                    </h2>
                     <p style="color: var(--text-muted); line-height: 1.6;">
                         Wyniki spotkań będą regularnie aktualizowane, a najważniejsze mecze i rezultaty będą publikowane na serwerze.<br><br>
                         Na podstawie wyników prowadzona będzie tabela ligi, dzięki której każdy będzie mógł śledzić sytuację swojej drużyny oraz walkę o najwyższe miejsca.
@@ -498,7 +534,9 @@
                 </div>
 
                 <div class="card">
-                    <h2 class="card-title"><i class="fa-solid fa-users"></i> SPOŁECZNOŚĆ</h2>
+                    <h2 class="card-title">
+                        <div class="card-title-content"><i class="fa-solid fa-users"></i> SPOŁECZNOŚĆ</div>
+                    </h2>
                     <p style="color: var(--text-muted); line-height: 1.6;">
                         VICTIM 2v2 League to not only same mecze.<br><br>
                         Discord ligi jest miejscem do komunikacji zawodników, organizacji spotkań, publikowania wyników, informacji o rozgrywkach oraz wspólnej integracji społeczności Counter-Strike.<br><br>
@@ -517,7 +555,10 @@
         <!-- ZAKŁADKA: TABELA -->
         <div id="tabela" class="tab-content">
             <div class="card">
-                <h2 class="card-title"><i class="fa-solid fa-list-ol"></i> Tabela Ligowa</h2>
+                <h2 class="card-title">
+                    <div class="card-title-content"><i class="fa-solid fa-list-ol"></i> Tabela Ligowa</div>
+                    <span class="update-info"><i class="fa-solid fa-clock"></i> Tabela aktualizuje się automatycznie co 1 dzień</span>
+                </h2>
                 
                 <div class="search-box">
                     <i class="fa-solid fa-magnifying-glass"></i>
@@ -528,57 +569,54 @@
                     <table id="teamsTable">
                         <thead>
                             <tr>
-                                <th style="text-align: center;">#</th>
+                                <th>#</th>
                                 <th>Drużyna</th>
-                                <th style="text-align: center;">Mecze</th>
-                                <th style="text-align: center;">W</th>
-                                <th style="text-align: center;">P</th>
-                                <th style="text-align: center;">Bilans Rund</th>
-                                <th style="text-align: center;">Pkt</th>
+                                <th>Mecze</th>
+                                <th>W</th>
+                                <th>P</th>
+                                <th>Pkt</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <!-- TUTAJ PO PROSTU WPISUJESZ LICZBĘ WYGRANYCH (W) I PRZEGRANYCH (P) -->
                             <tr>
-                                <td class="pos pos-1"><i class="fa-solid fa-crown"></i> 1</td>
+                                <td class="pos">1</td>
                                 <td>
                                     <div class="team-info">
                                         <img src="images/koniobijcy.png" alt="Koniobijcy" class="team-logo">
                                         <span>Koniobijcy</span>
                                     </div>
                                 </td>
-                                <td style="text-align: center;">0</td>
-                                <td style="text-align: center;">0</td>
-                                <td style="text-align: center;">0</td>
-                                <td style="text-align: center;">0</td>
-                                <td class="pts" style="text-align: center;">0</td>
+                                <td class="matches">0</td>
+                                <td class="wins">0</td>  <!-- Tutaj wpisz wygrane -->
+                                <td class="losses">0</td> <!-- Tutaj wpisz przegrane -->
+                                <td class="pts">0</td>
                             </tr>
                             <tr>
-                                <td class="pos pos-2">2</td>
+                                <td class="pos">2</td>
                                 <td>
                                     <div class="team-info">
                                         <img src="images/tutusie.png" alt="Tutusie" class="team-logo">
                                         <span>Tutusie</span>
                                     </div>
                                 </td>
-                                <td style="text-align: center;">0</td>
-                                <td style="text-align: center;">0</td>
-                                <td style="text-align: center;">0</td>
-                                <td style="text-align: center;">0</td>
-                                <td class="pts" style="text-align: center;">0</td>
+                                <td class="matches">0</td>
+                                <td class="wins">0</td>  <!-- Tutaj wpisz wygrane -->
+                                <td class="losses">0</td> <!-- Tutaj wpisz przegrane -->
+                                <td class="pts">0</td>
                             </tr>
                             <tr>
-                                <td class="pos pos-3">3</td>
+                                <td class="pos">3</td>
                                 <td>
                                     <div class="team-info">
                                         <img src="images/zypiekanka.png" alt="Żypiekanka" class="team-logo">
                                         <span>Żypiekanka</span>
                                     </div>
                                 </td>
-                                <td style="text-align: center;">0</td>
-                                <td style="text-align: center;">0</td>
-                                <td style="text-align: center;">0</td>
-                                <td style="text-align: center;">0</td>
-                                <td class="pts" style="text-align: center;">0</td>
+                                <td class="matches">0</td>
+                                <td class="wins">0</td>  <!-- Tutaj wpisz wygrane -->
+                                <td class="losses">0</td> <!-- Tutaj wpisz przegrane -->
+                                <td class="pts">0</td>
                             </tr>
                             <tr>
                                 <td class="pos">4</td>
@@ -588,11 +626,10 @@
                                         <span>Vendetta</span>
                                     </div>
                                 </td>
-                                <td style="text-align: center;">0</td>
-                                <td style="text-align: center;">0</td>
-                                <td style="text-align: center;">0</td>
-                                <td style="text-align: center;">0</td>
-                                <td class="pts" style="text-align: center;">0</td>
+                                <td class="matches">0</td>
+                                <td class="wins">0</td>  <!-- Tutaj wpisz wygrane -->
+                                <td class="losses">0</td> <!-- Tutaj wpisz przegrane -->
+                                <td class="pts">0</td>
                             </tr>
                             <tr>
                                 <td class="pos">5</td>
@@ -602,11 +639,10 @@
                                         <span>Chłopaki z premki</span>
                                     </div>
                                 </td>
-                                <td style="text-align: center;">0</td>
-                                <td style="text-align: center;">0</td>
-                                <td style="text-align: center;">0</td>
-                                <td style="text-align: center;">0</td>
-                                <td class="pts" style="text-align: center;">0</td>
+                                <td class="matches">0</td>
+                                <td class="wins">0</td>  <!-- Tutaj wpisz wygrane -->
+                                <td class="losses">0</td> <!-- Tutaj wpisz przegrane -->
+                                <td class="pts">0</td>
                             </tr>
                             <tr>
                                 <td class="pos">6</td>
@@ -616,11 +652,10 @@
                                         <span>Podopieczni</span>
                                     </div>
                                 </td>
-                                <td style="text-align: center;">0</td>
-                                <td style="text-align: center;">0</td>
-                                <td style="text-align: center;">0</td>
-                                <td style="text-align: center;">0</td>
-                                <td class="pts" style="text-align: center;">0</td>
+                                <td class="matches">0</td>
+                                <td class="wins">0</td>  <!-- Tutaj wpisz wygrane -->
+                                <td class="losses">0</td> <!-- Tutaj wpisz przegrane -->
+                                <td class="pts">0</td>
                             </tr>
                         </tbody>
                     </table>
@@ -631,7 +666,9 @@
         <!-- ZAKŁADKA: MAPY -->
         <div id="mapy" class="tab-content">
             <div class="card">
-                <h2 class="card-title"><i class="fa-solid fa-map-location-dot"></i> Pula Map (Map Pool)</h2>
+                <h2 class="card-title">
+                    <div class="card-title-content"><i class="fa-solid fa-map-location-dot"></i> Pula Map (Map Pool)</div>
+                </h2>
                 <p style="color: var(--text-muted); margin-bottom: 20px;">
                     Oficjalna pula map obowiązująca w trakcie rozgrywek VICTIM 2v2 League. Kliknij w wybraną mapę, aby przejść do jej opisu na CS2 Wiki.
                 </p>
@@ -667,7 +704,9 @@
         <!-- ZAKŁADKA: REGULAMIN -->
         <div id="regulamin" class="tab-content">
             <div class="card">
-                <h2 class="card-title"><i class="fa-solid fa-gavel"></i> REGULAMIN VICTIM 2v2 LEAGUE</h2>
+                <h2 class="card-title">
+                    <div class="card-title-content"><i class="fa-solid fa-gavel"></i> REGULAMIN VICTIM 2v2 LEAGUE</div>
+                </h2>
                 <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">
                     VICTIM 2v2 League to amatorska liga Counter-Strike 2 rozgrywana w formule 2v2 Wingman. Celem rozgrywek jest zapewnienie uczciwej, aktywnej i przyjemnej rywalizacji dla wszystkich uczestników. Dołączenie do ligi oznacza akceptację poniższego regulaminu.
                 </p>
@@ -851,6 +890,48 @@
                 }
             }
         }
+
+        function updateTableStandings() {
+            const table = document.getElementById("teamsTable");
+            const tbody = table.querySelector("tbody");
+            const rows = Array.from(tbody.querySelectorAll("tr"));
+
+            rows.forEach(row => {
+                const wins = parseInt(row.querySelector(".wins").textContent) || 0;
+                const losses = parseInt(row.querySelector(".losses").textContent) || 0;
+                const matches = wins + losses;
+                const points = wins * 3;
+
+                row.querySelector(".matches").textContent = matches;
+                row.querySelector(".pts").textContent = points;
+            });
+
+            rows.sort((a, b) => {
+                const ptsA = parseInt(a.querySelector(".pts").textContent);
+                const ptsB = parseInt(b.querySelector(".pts").textContent);
+                return ptsB - ptsA;
+            });
+
+            rows.forEach((row, index) => {
+                const posCell = row.querySelector(".pos");
+                posCell.className = "pos";
+                if (index === 0) {
+                    posCell.classList.add("pos-1", "pos");
+                    posCell.innerHTML = `<i class="fa-solid fa-crown"></i> 1`;
+                } else if (index === 1) {
+                    posCell.classList.add("pos-2");
+                    posCell.textContent = 2;
+                } else if (index === 2) {
+                    posCell.classList.add("pos-3");
+                    posCell.textContent = 3;
+                } else {
+                    posCell.textContent = index + 1;
+                }
+                tbody.appendChild(row);
+            });
+        }
+
+        window.onload = updateTableStandings;
     </script>
 </body>
 </html>
