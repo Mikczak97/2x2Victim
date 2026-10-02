@@ -184,6 +184,13 @@
             padding-bottom: 8px;
         }
 
+        .card-title.centered {
+            justify-content: center;
+            text-align: center;
+            font-size: 2.2rem;
+            text-shadow: 0 0 10px var(--accent-red-glow);
+        }
+
         .card-title-content {
             display: flex;
             align-items: center;
@@ -207,6 +214,79 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 20px;
+        }
+
+        /* --- DRABINKA / MATCHES FORMAT STYLING (ZMNIEJSZONE) --- */
+        .match-card-layout {
+            background: var(--bg-card-hover);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 12px 18px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .match-card-layout:hover {
+            border-color: var(--accent-red);
+            box-shadow: 0 0 12px var(--accent-red-glow);
+        }
+
+        .match-teams-column {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            flex: 1;
+            max-width: 300px;
+        }
+
+        .match-team-box {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 4px;
+            padding: 6px 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .match-connector {
+            width: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .match-winner-box {
+            background: rgba(18, 18, 24, 0.5);
+            border: 1px dashed rgba(255, 42, 59, 0.4);
+            border-radius: 4px;
+            padding: 14px 20px;
+            text-align: center;
+            font-family: 'Teko', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            opacity: 0.5;
+            text-transform: uppercase;
+            min-width: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .match-card-layout:hover .match-winner-box {
+            opacity: 0.8;
+            border-color: var(--accent-red);
+            color: #fff;
         }
 
         /* --- MAPS TAB STYLES --- */
@@ -329,7 +409,7 @@
 
         th:first-child, td:first-child {
             text-align: center !important;
-            width: 50px;
+            width: 60px;
         }
 
         td {
@@ -344,10 +424,23 @@
             background: var(--bg-card-hover);
         }
 
-        .pos { font-weight: 700; width: 50px; text-align: center; }
-        .pos-1 { color: #ffd700; font-size: 1.2rem; }
-        .pos-2 { color: #c0c0c0; font-size: 1.2rem; }
-        .pos-3 { color: #cd7f32; font-size: 1.2rem; }
+        .pos { font-weight: 700; width: 60px; text-align: center; }
+        .pos-yellow { color: #ffd700 !important; font-size: 1.2rem; }
+
+        .qualifier-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            color: #ffd700;
+            background: rgba(255, 215, 0, 0.12);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            vertical-align: middle;
+        }
 
         .team-info {
             display: flex;
@@ -434,12 +527,28 @@
             margin-top: auto;
         }
 
+        footer p {
+            margin-bottom: 5px;
+        }
+
+        footer a {
+            color: var(--text-muted);
+            text-decoration: underline;
+        }
+
+        footer a:hover {
+            color: #fff;
+        }
+
         @media (max-width: 768px) {
             .header-container { flex-direction: column; gap: 15px; }
             .hero h1 { font-size: 2.5rem; }
             nav { width: 100%; justify-content: center; }
             .nav-btn { padding: 8px 12px; font-size: 0.95rem; }
             .card-title { flex-direction: column; align-items: flex-start; gap: 5px; }
+            .card-title.centered { flex-direction: row; justify-content: center; }
+            .match-card-layout { flex-direction: column; align-items: stretch; gap: 10px; }
+            .match-connector { display: none; }
         }
     </style>
 </head>
@@ -458,6 +567,9 @@
                 </button>
                 <button class="nav-btn" onclick="switchTab(event, 'tabela')">
                     <i class="fa-solid fa-trophy"></i> Tabela
+                </button>
+                <button class="nav-btn" onclick="switchTab(event, 'drabinka')">
+                    <i class="fa-solid fa-sitemap"></i> Drabinka
                 </button>
                 <button class="nav-btn" onclick="switchTab(event, 'mapy')">
                     <i class="fa-solid fa-map"></i> Mapy
@@ -538,7 +650,7 @@
                         <div class="card-title-content"><i class="fa-solid fa-users"></i> SPOŁECZNOŚĆ</div>
                     </h2>
                     <p style="color: var(--text-muted); line-height: 1.6;">
-                        VICTIM 2v2 League to not only same mecze.<br><br>
+                        VICTIM 2v2 League to nie tylko same mecze.<br><br>
                         Discord ligi jest miejscem do komunikacji zawodników, organizacji spotkań, publikowania wyników, informacji o rozgrywkach oraz wspólnej integracji społeczności Counter-Strike.<br><br>
                         <strong>Dołącz, znajdź partnera, stwórz duet i pokaż, na co Cię stać.</strong>
                     </p>
@@ -578,7 +690,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- TUTAJ WPISUJESZ LICZBĘ WYGRANYCH (W) I PRZEGRANYCH (P) -->
                             <tr>
                                 <td class="pos">1</td>
                                 <td>
@@ -600,9 +711,9 @@
                                         <span>Tutusie</span>
                                     </div>
                                 </td>
-                                <td class="matches">0</td>
+                                <td class="matches">1</td>
                                 <td class="wins">0</td>
-                                <td class="losses">0</td>
+                                <td class="losses">1</td>
                                 <td class="pts">0</td>
                             </tr>
                             <tr>
@@ -613,10 +724,10 @@
                                         <span>Żypiekanka</span>
                                     </div>
                                 </td>
-                                <td class="matches">0</td>
-                                <td class="wins">0</td>
+                                <td class="matches">1</td>
+                                <td class="wins">1</td>
                                 <td class="losses">0</td>
-                                <td class="pts">0</td>
+                                <td class="pts">3</td>
                             </tr>
                             <tr>
                                 <td class="pos">4</td>
@@ -652,12 +763,11 @@
                                         <span>Podopieczni</span>
                                     </div>
                                 </td>
-                                <td class="matches">0</td>
+                                <td class="matches">1</td>
                                 <td class="wins">0</td>
-                                <td class="losses">0</td>
+                                <td class="losses">1</td>
                                 <td class="pts">0</td>
                             </tr>
-                            <!-- NOWE DRUŻYNY -->
                             <tr>
                                 <td class="pos">7</td>
                                 <td>
@@ -666,10 +776,10 @@
                                         <span>Bojlery</span>
                                     </div>
                                 </td>
-                                <td class="matches">0</td>
-                                <td class="wins">0</td>
+                                <td class="matches">1</td>
+                                <td class="wins">1</td>
                                 <td class="losses">0</td>
-                                <td class="pts">0</td>
+                                <td class="pts">3</td>
                             </tr>
                             <tr>
                                 <td class="pos">8</td>
@@ -687,6 +797,108 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+
+        <!-- ZAKŁADKA: DRABINKA -->
+        <div id="drabinka" class="tab-content">
+            <div class="card">
+                <h2 class="card-title centered">
+                    <i class="fa-solid fa-trophy" style="color: var(--accent-red); margin-right: 8px;"></i> KOLEJKA 1
+                </h2>
+
+                <!-- MECZ 1 -->
+                <div class="match-card-layout">
+                    <div class="match-teams-column">
+                        <div class="match-team-box">
+                            <img src="images/koniobijcy.png" alt="Koniobijcy" class="team-logo">
+                            <span>Koniobijcy</span>
+                        </div>
+                        <div class="match-team-box">
+                            <img src="images/pykpykpyk.png" alt="PykPykPyk" class="team-logo">
+                            <span>PykPykPyk</span>
+                        </div>
+                    </div>
+                    <div class="match-connector">
+                        <svg width="40" height="60" viewBox="0 0 40 60" style="overflow: visible;">
+                            <path d="M 0 12 L 20 12 L 20 30 L 40 30" fill="none" stroke="rgba(255,42,59,0.4)" stroke-width="2"/>
+                            <path d="M 0 48 L 20 48 L 20 30 L 40 30" fill="none" stroke="rgba(255,42,59,0.4)" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div class="match-winner-box">
+                        <i class="fa-solid fa-clock"></i> Do rozegrania
+                    </div>
+                </div>
+
+                <!-- MECZ 2 -->
+                <div class="match-card-layout" style="border-color: var(--accent-red);">
+                    <div class="match-teams-column">
+                        <div class="match-team-box">
+                            <img src="images/tutusie.png" alt="Tutusie" class="team-logo">
+                            <span>Tutusie</span>
+                        </div>
+                        <div class="match-team-box" style="border-color: rgba(255,42,59,0.5);">
+                            <img src="images/bojlery.png" alt="Bojlery" class="team-logo">
+                            <span>Bojlery</span>
+                        </div>
+                    </div>
+                    <div class="match-connector">
+                        <svg width="40" height="60" viewBox="0 0 40 60" style="overflow: visible;">
+                            <path d="M 0 12 L 20 12 L 20 30 L 40 30" fill="none" stroke="rgba(255,42,59,0.4)" stroke-width="2"/>
+                            <path d="M 0 48 L 20 48 L 20 30 L 40 30" fill="none" stroke="rgba(255,42,59,0.4)" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div class="match-winner-box" style="opacity: 1; border: 1px solid var(--accent-red); color: #fff; background: rgba(255, 42, 59, 0.08);">
+                        <span style="font-size: 1.1rem; letter-spacing: 1px;">Tutusie <strong style="color: var(--accent-red);">2 : 9</strong> Bojlery</span>
+                    </div>
+                </div>
+
+                <!-- MECZ 3 -->
+                <div class="match-card-layout" style="border-color: var(--accent-red);">
+                    <div class="match-teams-column">
+                        <div class="match-team-box" style="border-color: rgba(255,42,59,0.5);">
+                            <img src="images/zypiekanka.png" alt="Żypiekanka" class="team-logo">
+                            <span>Żypiekanka</span>
+                        </div>
+                        <div class="match-team-box">
+                            <img src="images/podopieczni.png" alt="Podopieczni" class="team-logo">
+                            <span>Podopieczni</span>
+                        </div>
+                    </div>
+                    <div class="match-connector">
+                        <svg width="40" height="60" viewBox="0 0 40 60" style="overflow: visible;">
+                            <path d="M 0 12 L 20 12 L 20 30 L 40 30" fill="none" stroke="rgba(255,42,59,0.4)" stroke-width="2"/>
+                            <path d="M 0 48 L 20 48 L 20 30 L 40 30" fill="none" stroke="rgba(255,42,59,0.4)" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div class="match-winner-box" style="opacity: 1; border: 1px solid var(--accent-red); color: #fff; background: rgba(255, 42, 59, 0.08);">
+                        <span style="font-size: 1.1rem; letter-spacing: 1px;">Żypiekanka <strong style="color: var(--accent-red);">11 : 8</strong> Podopieczni</span>
+                    </div>
+                </div>
+
+                <!-- MECZ 4 -->
+                <div class="match-card-layout">
+                    <div class="match-teams-column">
+                        <div class="match-team-box">
+                            <img src="images/vendetta.png" alt="Vendetta" class="team-logo">
+                            <span>Vendetta</span>
+                        </div>
+                        <div class="match-team-box">
+                            <img src="images/chlopaki_z_premki.png" alt="Chłopaki z premki" class="team-logo">
+                            <span>Chłopaki z premki</span>
+                        </div>
+                    </div>
+                    <div class="match-connector">
+                        <svg width="40" height="60" viewBox="0 0 40 60" style="overflow: visible;">
+                            <path d="M 0 12 L 20 12 L 20 30 L 40 30" fill="none" stroke="rgba(255,42,59,0.4)" stroke-width="2"/>
+                            <path d="M 0 48 L 20 48 L 20 30 L 40 30" fill="none" stroke="rgba(255,42,59,0.4)" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div class="match-winner-box">
+                        <i class="fa-solid fa-clock"></i> Do rozegrania
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -765,7 +977,7 @@
                         <span class="section-badge">§3. MECZE</span>
                         <ul class="rules-list">
                             <li>Wszystkie spotkania rozgrywane są w trybie Wingman 2v2.</li>
-                            <li>Terminy spotkań ustalane są przez organizatora lub bezpośrednio przez zainteresowane drużyny zgodnie z harmonogramem ligi.</li>
+                            <li>Terminy spotkań ustalane są przez organizator lub bezpośrednio przez zainteresowane drużyny zgodnie z harmonogramem ligi.</li>
                             <li>Drużyny zobowiązane są pojawić się na serwerze o ustalonej godzinie.</li>
                             <li>Zaleca się, aby zawodnicy byli gotowi do rozpoczęcia meczu minimum 10 minut przed wyznaczonym terminem.</li>
                             <li>W przypadku problemów technicznych należy niezwłocznie poinformować przeciwnika oraz organizatora.</li>
@@ -883,7 +1095,10 @@
 
     <!-- FOOTER -->
     <footer>
-        <p>&copy; 2026 VICTIM 2v2 LEAGUE. Wszelkie prawa zastrzeżone.</p>
+        <p>&copy; 2026 VICTIM 2v2 LEAGUE. </p>
+        <p>Strona napisana przez Mikczak 💖. </p>
+        <p>Bugi zgłoś na mojego discorda: mkd_mikczak </p>
+        <p>Changelog znajdziesz pod adresem <a href="https://github.com/Mikczak97/2x2Victim" target="_blank">https://github.com/Mikczak97/2x2Victim</a>. </p>
     </footer>
 
     <!-- JAVASCRIPT LOGIC -->
@@ -933,27 +1148,48 @@
                 row.querySelector(".pts").textContent = points;
             });
 
+            // Zmodyfikowane sortowanie: drużyny z > 0 meczów zawsze wyżej niż te z 0 meczów
             rows.sort((a, b) => {
-                const ptsA = parseInt(a.querySelector(".pts").textContent);
-                const ptsB = parseInt(b.querySelector(".pts").textContent);
+                const matchesA = parseInt(a.querySelector(".matches").textContent) || 0;
+                const matchesB = parseInt(b.querySelector(".matches").textContent) || 0;
+                const ptsA = parseInt(a.querySelector(".pts").textContent) || 0;
+                const ptsB = parseInt(b.querySelector(".pts").textContent) || 0;
+
+                // Jeśli drużyna A ma rozegrane mecze, a B ma 0 -> A idzie wyżej
+                if (matchesA > 0 && matchesB === 0) return -1;
+                // Jeśli drużyna B ma rozegrane mecze, a A ma 0 -> B idzie wyżej
+                if (matchesA === 0 && matchesB > 0) return 1;
+
+                // W pozostałych przypadkach standardowo sortujemy po punktach malejąco
                 return ptsB - ptsA;
             });
 
             rows.forEach((row, index) => {
                 const posCell = row.querySelector(".pos");
+                const teamCell = row.querySelector("td:nth-child(2) .team-info");
+                
+                // Reset classes
                 posCell.className = "pos";
-                if (index === 0) {
-                    posCell.classList.add("pos-1", "pos");
-                    posCell.innerHTML = `<i class="fa-solid fa-crown"></i> 1`;
-                } else if (index === 1) {
-                    posCell.classList.add("pos-2");
-                    posCell.textContent = 2;
-                } else if (index === 2) {
-                    posCell.classList.add("pos-3");
-                    posCell.textContent = 3;
+                
+                // Remove existing qualifier badge if any
+                const existingBadge = teamCell.querySelector(".qualifier-badge");
+                if (existingBadge) {
+                    existingBadge.remove();
+                }
+
+                if (index < 4) {
+                    posCell.classList.add("pos-yellow");
+                    posCell.textContent = index + 1;
+
+                    // Add Playoff Qualifier badge
+                    const badge = document.createElement("span");
+                    badge.className = "qualifier-badge";
+                    badge.textContent = "Playoff Qualifier";
+                    teamCell.appendChild(badge);
                 } else {
                     posCell.textContent = index + 1;
                 }
+
                 tbody.appendChild(row);
             });
         }
