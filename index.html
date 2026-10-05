@@ -216,7 +216,7 @@
             gap: 20px;
         }
 
-        /* --- DRABINKA / MATCHES FORMAT STYLING (ZMNIEJSZONE) --- */
+        /* --- DRABINKA / MATCHES FORMAT STYLING --- */
         .match-card-layout {
             background: var(--bg-card-hover);
             border: 1px solid var(--border-color);
@@ -690,7 +690,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <!-- data-wo="true" spycha Koniobijczych na dół przy braku wygranej -->
+                            <tr data-wo="true">
                                 <td class="pos">1</td>
                                 <td>
                                     <div class="team-info">
@@ -698,9 +699,9 @@
                                         <span>Koniobijcy</span>
                                     </div>
                                 </td>
-                                <td class="matches">0</td>
+                                <td class="matches">1</td>
                                 <td class="wins">0</td>
-                                <td class="losses">0</td>
+                                <td class="losses">1</td>
                                 <td class="pts">0</td>
                             </tr>
                             <tr>
@@ -737,10 +738,10 @@
                                         <span>Vendetta</span>
                                     </div>
                                 </td>
-                                <td class="matches">0</td>
-                                <td class="wins">0</td>
+                                <td class="matches">1</td>
+                                <td class="wins">1</td>
                                 <td class="losses">0</td>
-                                <td class="pts">0</td>
+                                <td class="pts">3</td>
                             </tr>
                             <tr>
                                 <td class="pos">5</td>
@@ -750,9 +751,9 @@
                                         <span>Chłopaki z premki</span>
                                     </div>
                                 </td>
-                                <td class="matches">0</td>
+                                <td class="matches">1</td>
                                 <td class="wins">0</td>
-                                <td class="losses">0</td>
+                                <td class="losses">1</td>
                                 <td class="pts">0</td>
                             </tr>
                             <tr>
@@ -789,10 +790,10 @@
                                         <span>PykPykPyk</span>
                                     </div>
                                 </td>
-                                <td class="matches">0</td>
-                                <td class="wins">0</td>
+                                <td class="matches">1</td>
+                                <td class="wins">1</td>
                                 <td class="losses">0</td>
-                                <td class="pts">0</td>
+                                <td class="pts">3</td>
                             </tr>
                         </tbody>
                     </table>
@@ -808,13 +809,13 @@
                 </h2>
 
                 <!-- MECZ 1 -->
-                <div class="match-card-layout">
+                <div class="match-card-layout" style="border-color: var(--accent-red);">
                     <div class="match-teams-column">
                         <div class="match-team-box">
                             <img src="images/koniobijcy.png" alt="Koniobijcy" class="team-logo">
                             <span>Koniobijcy</span>
                         </div>
-                        <div class="match-team-box">
+                        <div class="match-team-box" style="border-color: rgba(255,42,59,0.5);">
                             <img src="images/pykpykpyk.png" alt="PykPykPyk" class="team-logo">
                             <span>PykPykPyk</span>
                         </div>
@@ -825,8 +826,8 @@
                             <path d="M 0 48 L 20 48 L 20 30 L 40 30" fill="none" stroke="rgba(255,42,59,0.4)" stroke-width="2"/>
                         </svg>
                     </div>
-                    <div class="match-winner-box">
-                        <i class="fa-solid fa-clock"></i> Do rozegrania
+                    <div class="match-winner-box" style="opacity: 1; border: 1px solid var(--accent-red); color: #fff; background: rgba(255, 42, 59, 0.08);">
+                        <span style="font-size: 1.1rem; letter-spacing: 1px;">Koniobijcy <strong style="color: var(--accent-red);">0 : 9</strong> PykPykPyk (W/O)</span>
                     </div>
                 </div>
 
@@ -877,9 +878,9 @@
                 </div>
 
                 <!-- MECZ 4 -->
-                <div class="match-card-layout">
+                <div class="match-card-layout" style="border-color: var(--accent-red);">
                     <div class="match-teams-column">
-                        <div class="match-team-box">
+                        <div class="match-team-box" style="border-color: rgba(255,42,59,0.5);">
                             <img src="images/vendetta.png" alt="Vendetta" class="team-logo">
                             <span>Vendetta</span>
                         </div>
@@ -894,8 +895,8 @@
                             <path d="M 0 48 L 20 48 L 20 30 L 40 30" fill="none" stroke="rgba(255,42,59,0.4)" stroke-width="2"/>
                         </svg>
                     </div>
-                    <div class="match-winner-box">
-                        <i class="fa-solid fa-clock"></i> Do rozegrania
+                    <div class="match-winner-box" style="opacity: 1; border: 1px solid var(--accent-red); color: #fff; background: rgba(255, 42, 59, 0.08);">
+                        <span style="font-size: 1.1rem; letter-spacing: 1px;">Vendetta <strong style="color: var(--accent-red);">9 : 4</strong> Chłopaki z premki</span>
                     </div>
                 </div>
 
@@ -1148,30 +1149,29 @@
                 row.querySelector(".pts").textContent = points;
             });
 
-            // Zmodyfikowane sortowanie: drużyny z > 0 meczów zawsze wyżej niż te z 0 meczów
+            // Sortowanie:
+            // 1. Punkty (malejąco)
+            // 2. Kara za Walkover (drużyna z data-wo="true" spada na koniec wśród drużyn o tej samej liczbie pkt)
             rows.sort((a, b) => {
-                const matchesA = parseInt(a.querySelector(".matches").textContent) || 0;
-                const matchesB = parseInt(b.querySelector(".matches").textContent) || 0;
                 const ptsA = parseInt(a.querySelector(".pts").textContent) || 0;
                 const ptsB = parseInt(b.querySelector(".pts").textContent) || 0;
 
-                // Jeśli drużyna A ma rozegrane mecze, a B ma 0 -> A idzie wyżej
-                if (matchesA > 0 && matchesB === 0) return -1;
-                // Jeśli drużyna B ma rozegrane mecze, a A ma 0 -> B idzie wyżej
-                if (matchesA === 0 && matchesB > 0) return 1;
+                if (ptsA !== ptsB) return ptsB - ptsA;
 
-                // W pozostałych przypadkach standardowo sortujemy po punktach malejąco
-                return ptsB - ptsA;
+                const woA = a.getAttribute("data-wo") === "true" ? 1 : 0;
+                const woB = b.getAttribute("data-wo") === "true" ? 1 : 0;
+
+                return woA - woB; // 0 (bez W/O) wyżej niż 1 (z W/O)
             });
 
             rows.forEach((row, index) => {
                 const posCell = row.querySelector(".pos");
                 const teamCell = row.querySelector("td:nth-child(2) .team-info");
                 
-                // Reset classes
+                // Reset klas
                 posCell.className = "pos";
                 
-                // Remove existing qualifier badge if any
+                // Usunięcie starych odznak
                 const existingBadge = teamCell.querySelector(".qualifier-badge");
                 if (existingBadge) {
                     existingBadge.remove();
@@ -1181,7 +1181,7 @@
                     posCell.classList.add("pos-yellow");
                     posCell.textContent = index + 1;
 
-                    // Add Playoff Qualifier badge
+                    // Odznaka awansu do Playoffów
                     const badge = document.createElement("span");
                     badge.className = "qualifier-badge";
                     badge.textContent = "Playoff Qualifier";
