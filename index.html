@@ -450,7 +450,8 @@
         th:last-child, td:last-child,
         th:nth-last-child(2), td:nth-last-child(2),
         th:nth-last-child(3), td:nth-last-child(3),
-        th:nth-last-child(4), td:nth-last-child(4) {
+        th:nth-last-child(4), td:nth-last-child(4),
+        th:nth-last-child(5), td:nth-last-child(5) {
             text-align: center;
         }
 
@@ -506,6 +507,7 @@
         }
 
         .pts { color: var(--accent-red); font-weight: 700; }
+        .rounds-diff { font-weight: 600; font-size: 0.95rem; color: var(--text-main); }
 
         /* --- REGULAMIN STYLES --- */
         .rules-list {
@@ -733,11 +735,12 @@
                                 <th>Mecze</th>
                                 <th>W</th>
                                 <th>P</th>
+                                <th>Bilans</th>
                                 <th>Pkt</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr data-rw="18" data-rl="4">
                                 <td class="pos">1</td>
                                 <td>
                                     <div class="team-info">
@@ -748,9 +751,10 @@
                                 <td class="matches">2</td>
                                 <td class="wins">2</td>
                                 <td class="losses">0</td>
+                                <td class="rounds-diff">-</td>
                                 <td class="pts">6</td>
                             </tr>
-                            <tr>
+                            <tr data-rw="9" data-rl="2">
                                 <td class="pos">2</td>
                                 <td>
                                     <div class="team-info">
@@ -761,9 +765,10 @@
                                 <td class="matches">1</td>
                                 <td class="wins">1</td>
                                 <td class="losses">0</td>
+                                <td class="rounds-diff">-</td>
                                 <td class="pts">3</td>
                             </tr>
-                            <tr>
+                            <tr data-rw="17" data-rl="11">
                                 <td class="pos">3</td>
                                 <td>
                                     <div class="team-info">
@@ -774,23 +779,11 @@
                                 <td class="matches">2</td>
                                 <td class="wins">1</td>
                                 <td class="losses">1</td>
+                                <td class="rounds-diff">-</td>
                                 <td class="pts">3</td>
                             </tr>
-                            <tr>
+                            <tr data-rw="9" data-rl="9">
                                 <td class="pos">4</td>
-                                <td>
-                                    <div class="team-info">
-                                        <img src="images/zypiekanka.png" alt="Żypiekanka" class="team-logo">
-                                        <span>Żypiekanka</span>
-                                    </div>
-                                </td>
-                                <td class="matches">2</td>
-                                <td class="wins">1</td>
-                                <td class="losses">1</td>
-                                <td class="pts">3</td>
-                            </tr>
-                            <tr>
-                                <td class="pos">5</td>
                                 <td>
                                     <div class="team-info">
                                         <img src="images/pykpykpyk.png" alt="PykPykPyk" class="team-logo">
@@ -800,23 +793,25 @@
                                 <td class="matches">2</td>
                                 <td class="wins">1</td>
                                 <td class="losses">1</td>
+                                <td class="rounds-diff">-</td>
                                 <td class="pts">3</td>
                             </tr>
-                            <tr>
-                                <td class="pos">6</td>
+                            <tr data-rw="11" data-rl="17">
+                                <td class="pos">5</td>
                                 <td>
                                     <div class="team-info">
-                                        <img src="images/tutusie.png" alt="Tutusie" class="team-logo">
-                                        <span>Tutusie</span>
+                                        <img src="images/zypiekanka.png" alt="Żypiekanka" class="team-logo">
+                                        <span>Żypiekanka</span>
                                     </div>
                                 </td>
-                                <td class="matches">1</td>
-                                <td class="wins">0</td>
+                                <td class="matches">2</td>
+                                <td class="wins">1</td>
                                 <td class="losses">1</td>
-                                <td class="pts">0</td>
+                                <td class="rounds-diff">-</td>
+                                <td class="pts">3</td>
                             </tr>
-                            <tr>
-                                <td class="pos">7</td>
+                            <tr data-rw="4" data-rl="9">
+                                <td class="pos">6</td>
                                 <td>
                                     <div class="team-info">
                                         <img src="images/chlopaki_z_premki.png" alt="Chłopaki z premki" class="team-logo">
@@ -826,9 +821,24 @@
                                 <td class="matches">1</td>
                                 <td class="wins">0</td>
                                 <td class="losses">1</td>
+                                <td class="rounds-diff">-</td>
                                 <td class="pts">0</td>
                             </tr>
-                            <tr>
+                            <tr data-rw="2" data-rl="9">
+                                <td class="pos">7</td>
+                                <td>
+                                    <div class="team-info">
+                                        <img src="images/tutusie.png" alt="Tutusie" class="team-logo">
+                                        <span>Tutusie</span>
+                                    </div>
+                                </td>
+                                <td class="matches">1</td>
+                                <td class="wins">0</td>
+                                <td class="losses">1</td>
+                                <td class="rounds-diff">-</td>
+                                <td class="pts">0</td>
+                            </tr>
+                            <tr data-rw="0" data-rl="9">
                                 <td class="pos">8</td>
                                 <td>
                                     <div class="team-info">
@@ -839,6 +849,7 @@
                                 <td class="matches">1</td>
                                 <td class="wins">0</td>
                                 <td class="losses">1</td>
+                                <td class="rounds-diff">-</td>
                                 <td class="pts">0</td>
                             </tr>
                         </tbody>
@@ -1307,24 +1318,73 @@
                 const matches = wins + losses;
                 const points = wins * 3;
 
+                const rw = parseInt(row.getAttribute("data-rw")) || 0;
+                const rl = parseInt(row.getAttribute("data-rl")) || 0;
+                const rd = rw - rl;
+
                 row.querySelector(".matches").textContent = matches;
                 row.querySelector(".pts").textContent = points;
+
+                const rdCell = row.querySelector(".rounds-diff");
+                if (rdCell) {
+                    const rdSign = rd > 0 ? `+${rd}` : `${rd}`;
+                    rdCell.textContent = `${rw}:${rl} (${rdSign})`;
+                }
             });
 
-            // Dynamiczne sortowanie według punktów oraz zwycięstw
+            // LOGIKA SORTOWANIA TABELI (POŁĄCZONY TIE-BREAKER):
+            // 1. Drużyny z rozegranymi meczami wyżej od tych z 0 spotkań
+            // 2. Punkty (Pkt) - malejąco
+            // 3. Jeśli różnica bilansu rund (RD) wynosi <= 2 rundy między zespołami:
+            //    -> Wygrane mecze (W) mają priorytet, następnie mniejsza liczba porażek (P)
+            // 4. Jeśli różnica bilansu jest znacząca (> 2 rundy):
+            //    -> Wyższy bilans rund (RD) ma priorytet
             rows.sort((a, b) => {
                 const matchesA = parseInt(a.querySelector(".matches").textContent) || 0;
                 const matchesB = parseInt(b.querySelector(".matches").textContent) || 0;
-                const ptsA = parseInt(a.querySelector(".pts").textContent) || 0;
-                const ptsB = parseInt(b.querySelector(".pts").textContent) || 0;
-                const winsA = parseInt(a.querySelector(".wins").textContent) || 0;
-                const winsB = parseInt(b.querySelector(".wins").textContent) || 0;
 
                 if (matchesA > 0 && matchesB === 0) return -1;
                 if (matchesA === 0 && matchesB > 0) return 1;
 
+                const ptsA = parseInt(a.querySelector(".pts").textContent) || 0;
+                const ptsB = parseInt(b.querySelector(".pts").textContent) || 0;
                 if (ptsB !== ptsA) return ptsB - ptsA;
-                return winsB - winsA;
+
+                const rwA = parseInt(a.getAttribute("data-rw")) || 0;
+                const rlA = parseInt(a.getAttribute("data-rl")) || 0;
+                const rdA = rwA - rlA;
+
+                const rwB = parseInt(b.getAttribute("data-rw")) || 0;
+                const rlB = parseInt(b.getAttribute("data-rl")) || 0;
+                const rdB = rwB - rlB;
+
+                const winsA = parseInt(a.querySelector(".wins").textContent) || 0;
+                const winsB = parseInt(b.querySelector(".wins").textContent) || 0;
+
+                const lossesA = parseInt(a.querySelector(".losses").textContent) || 0;
+                const lossesB = parseInt(b.querySelector(".losses").textContent) || 0;
+
+                // WARUNEK MAŁEJ RÓŻNICY BILANSU (<= 2 RUNDY):
+                if (Math.abs(rdA - rdB) <= 2) {
+                    // Decyduje liczba wygranych meczów (W)
+                    if (winsB !== winsA) return winsB - winsA;
+
+                    // Mniejsza liczba porażek (P)
+                    if (lossesA !== lossesB) return lossesA - lossesB;
+
+                    // Bilans rund (RD)
+                    if (rdB !== rdA) return rdB - rdA;
+
+                    // Liczba zdobytych rund (RW)
+                    return rwB - rwA;
+                }
+
+                // WARUNEK ZNACZĄCEJ RÓŻNICY BILANSU (> 2 RUNDY):
+                if (rdB !== rdA) return rdB - rdA;
+
+                if (winsB !== winsA) return winsB - winsA;
+                if (lossesA !== lossesB) return lossesA - lossesB;
+                return rwB - rwA;
             });
 
             rows.forEach((row, index) => {
