@@ -184,13 +184,6 @@
             padding-bottom: 8px;
         }
 
-        .card-title.centered {
-            justify-content: center;
-            text-align: center;
-            font-size: 2.2rem;
-            text-shadow: 0 0 10px var(--accent-red-glow);
-        }
-
         .card-title-content {
             display: flex;
             align-items: center;
@@ -214,6 +207,60 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 20px;
+        }
+
+        /* --- PRZEŁĄCZNIK KOLEJEK W DRABINCE --- */
+        .kolejka-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 42, 59, 0.15);
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .kolejka-header h2 {
+            font-family: 'Teko', sans-serif;
+            font-size: 2.2rem;
+            letter-spacing: 1px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            text-shadow: 0 0 10px var(--accent-red-glow);
+        }
+
+        .kolejka-selector {
+            display: flex;
+            gap: 8px;
+        }
+
+        .kolejka-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 6px 16px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: 'Teko', sans-serif;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .kolejka-btn:hover {
+            color: #fff;
+            border-color: var(--accent-red);
+            background: rgba(255, 42, 59, 0.1);
+        }
+
+        .kolejka-btn.active {
+            background: var(--accent-red);
+            color: #fff;
+            border-color: var(--accent-red);
+            box-shadow: 0 0 12px var(--accent-red-glow);
         }
 
         /* --- DRABINKA / MATCHES FORMAT STYLING --- */
@@ -275,7 +322,7 @@
             color: var(--text-muted);
             opacity: 0.5;
             text-transform: uppercase;
-            min-width: 160px;
+            min-width: 180px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -546,7 +593,7 @@
             nav { width: 100%; justify-content: center; }
             .nav-btn { padding: 8px 12px; font-size: 0.95rem; }
             .card-title { flex-direction: column; align-items: flex-start; gap: 5px; }
-            .card-title.centered { flex-direction: row; justify-content: center; }
+            .kolejka-header { flex-direction: column; align-items: flex-start; gap: 10px; }
             .match-card-layout { flex-direction: column; align-items: stretch; gap: 10px; }
             .match-connector { display: none; }
         }
@@ -690,22 +737,73 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- data-wo="true" spycha Koniobijczych na dół przy braku wygranej -->
-                            <tr data-wo="true">
+                            <tr>
                                 <td class="pos">1</td>
                                 <td>
                                     <div class="team-info">
-                                        <img src="images/koniobijcy.png" alt="Koniobijcy" class="team-logo">
-                                        <span>Koniobijcy</span>
+                                        <img src="images/vendetta.png" alt="Vendetta" class="team-logo">
+                                        <span>Vendetta</span>
                                     </div>
                                 </td>
-                                <td class="matches">1</td>
-                                <td class="wins">0</td>
-                                <td class="losses">1</td>
-                                <td class="pts">0</td>
+                                <td class="matches">2</td>
+                                <td class="wins">2</td>
+                                <td class="losses">0</td>
+                                <td class="pts">6</td>
                             </tr>
                             <tr>
                                 <td class="pos">2</td>
+                                <td>
+                                    <div class="team-info">
+                                        <img src="images/psi_patrol.png" alt="Psi Patrol" class="team-logo">
+                                        <span>Psi Patrol</span>
+                                    </div>
+                                </td>
+                                <td class="matches">1</td>
+                                <td class="wins">1</td>
+                                <td class="losses">0</td>
+                                <td class="pts">3</td>
+                            </tr>
+                            <tr>
+                                <td class="pos">3</td>
+                                <td>
+                                    <div class="team-info">
+                                        <img src="images/podopieczni.png" alt="Podopieczni" class="team-logo">
+                                        <span>Podopieczni</span>
+                                    </div>
+                                </td>
+                                <td class="matches">2</td>
+                                <td class="wins">1</td>
+                                <td class="losses">1</td>
+                                <td class="pts">3</td>
+                            </tr>
+                            <tr>
+                                <td class="pos">4</td>
+                                <td>
+                                    <div class="team-info">
+                                        <img src="images/zypiekanka.png" alt="Żypiekanka" class="team-logo">
+                                        <span>Żypiekanka</span>
+                                    </div>
+                                </td>
+                                <td class="matches">2</td>
+                                <td class="wins">1</td>
+                                <td class="losses">1</td>
+                                <td class="pts">3</td>
+                            </tr>
+                            <tr>
+                                <td class="pos">5</td>
+                                <td>
+                                    <div class="team-info">
+                                        <img src="images/pykpykpyk.png" alt="PykPykPyk" class="team-logo">
+                                        <span>PykPykPyk</span>
+                                    </div>
+                                </td>
+                                <td class="matches">2</td>
+                                <td class="wins">1</td>
+                                <td class="losses">1</td>
+                                <td class="pts">3</td>
+                            </tr>
+                            <tr>
+                                <td class="pos">6</td>
                                 <td>
                                     <div class="team-info">
                                         <img src="images/tutusie.png" alt="Tutusie" class="team-logo">
@@ -718,33 +816,7 @@
                                 <td class="pts">0</td>
                             </tr>
                             <tr>
-                                <td class="pos">3</td>
-                                <td>
-                                    <div class="team-info">
-                                        <img src="images/zypiekanka.png" alt="Żypiekanka" class="team-logo">
-                                        <span>Żypiekanka</span>
-                                    </div>
-                                </td>
-                                <td class="matches">1</td>
-                                <td class="wins">1</td>
-                                <td class="losses">0</td>
-                                <td class="pts">3</td>
-                            </tr>
-                            <tr>
-                                <td class="pos">4</td>
-                                <td>
-                                    <div class="team-info">
-                                        <img src="images/vendetta.png" alt="Vendetta" class="team-logo">
-                                        <span>Vendetta</span>
-                                    </div>
-                                </td>
-                                <td class="matches">1</td>
-                                <td class="wins">1</td>
-                                <td class="losses">0</td>
-                                <td class="pts">3</td>
-                            </tr>
-                            <tr>
-                                <td class="pos">5</td>
+                                <td class="pos">7</td>
                                 <td>
                                     <div class="team-info">
                                         <img src="images/chlopaki_z_premki.png" alt="Chłopaki z premki" class="team-logo">
@@ -757,43 +829,17 @@
                                 <td class="pts">0</td>
                             </tr>
                             <tr>
-                                <td class="pos">6</td>
+                                <td class="pos">8</td>
                                 <td>
                                     <div class="team-info">
-                                        <img src="images/podopieczni.png" alt="Podopieczni" class="team-logo">
-                                        <span>Podopieczni</span>
+                                        <img src="images/koniobijcy.png" alt="Koniobijcy" class="team-logo">
+                                        <span>Koniobijcy</span>
                                     </div>
                                 </td>
                                 <td class="matches">1</td>
                                 <td class="wins">0</td>
                                 <td class="losses">1</td>
                                 <td class="pts">0</td>
-                            </tr>
-                            <tr>
-                                <td class="pos">7</td>
-                                <td>
-                                    <div class="team-info">
-                                        <img src="images/bojlery.png" alt="Bojlery" class="team-logo">
-                                        <span>Bojlery</span>
-                                    </div>
-                                </td>
-                                <td class="matches">1</td>
-                                <td class="wins">1</td>
-                                <td class="losses">0</td>
-                                <td class="pts">3</td>
-                            </tr>
-                            <tr>
-                                <td class="pos">8</td>
-                                <td>
-                                    <div class="team-info">
-                                        <img src="images/pykpykpyk.png" alt="PykPykPyk" class="team-logo">
-                                        <span>PykPykPyk</span>
-                                    </div>
-                                </td>
-                                <td class="matches">1</td>
-                                <td class="wins">1</td>
-                                <td class="losses">0</td>
-                                <td class="pts">3</td>
                             </tr>
                         </tbody>
                     </table>
@@ -804,99 +850,203 @@
         <!-- ZAKŁADKA: DRABINKA -->
         <div id="drabinka" class="tab-content">
             <div class="card">
-                <h2 class="card-title centered">
-                    <i class="fa-solid fa-trophy" style="color: var(--accent-red); margin-right: 8px;"></i> KOLEJKA 1
-                </h2>
-
-                <!-- MECZ 1 -->
-                <div class="match-card-layout" style="border-color: var(--accent-red);">
-                    <div class="match-teams-column">
-                        <div class="match-team-box">
-                            <img src="images/koniobijcy.png" alt="Koniobijcy" class="team-logo">
-                            <span>Koniobijcy</span>
-                        </div>
-                        <div class="match-team-box" style="border-color: rgba(255,42,59,0.5);">
-                            <img src="images/pykpykpyk.png" alt="PykPykPyk" class="team-logo">
-                            <span>PykPykPyk</span>
-                        </div>
-                    </div>
-                    <div class="match-connector">
-                        <svg width="40" height="60" viewBox="0 0 40 60" style="overflow: visible;">
-                            <path d="M 0 12 L 20 12 L 20 30 L 40 30" fill="none" stroke="rgba(255,42,59,0.4)" stroke-width="2"/>
-                            <path d="M 0 48 L 20 48 L 20 30 L 40 30" fill="none" stroke="rgba(255,42,59,0.4)" stroke-width="2"/>
-                        </svg>
-                    </div>
-                    <div class="match-winner-box" style="opacity: 1; border: 1px solid var(--accent-red); color: #fff; background: rgba(255, 42, 59, 0.08);">
-                        <span style="font-size: 1.1rem; letter-spacing: 1px;">Koniobijcy <strong style="color: var(--accent-red);">0 : 9</strong> PykPykPyk (W/O)</span>
+                
+                <!-- NAGŁÓWEK Z PRZEŁĄCZNIKIEM KOLEJEK -->
+                <div class="kolejka-header">
+                    <h2><i class="fa-solid fa-trophy" style="color: var(--accent-red); margin-right: 10px;"></i> TERMINARZ // <span id="kolejka-title">KOLEJKA 2</span></h2>
+                    <div class="kolejka-selector">
+                        <button id="kolejka-btn-1" class="kolejka-btn" onclick="switchKolejka(1)">Kolejka 1</button>
+                        <button id="kolejka-btn-2" class="kolejka-btn active" onclick="switchKolejka(2)">Kolejka 2</button>
                     </div>
                 </div>
 
-                <!-- MECZ 2 -->
-                <div class="match-card-layout" style="border-color: var(--accent-red);">
-                    <div class="match-teams-column">
-                        <div class="match-team-box">
-                            <img src="images/tutusie.png" alt="Tutusie" class="team-logo">
-                            <span>Tutusie</span>
+                <!-- KOLEJKA 1 CONTENT -->
+                <div id="kolejka-1" class="kolejka-content" style="display: none;">
+                    <!-- MECZ 1 (KOLEJKA 1) -->
+                    <div class="match-card-layout" style="border-color: var(--accent-red);">
+                        <div class="match-teams-column">
+                            <div class="match-team-box">
+                                <img src="images/koniobijcy.png" alt="Koniobijcy" class="team-logo">
+                                <span>Koniobijcy</span>
+                            </div>
+                            <div class="match-team-box" style="border-color: rgba(255,42,59,0.5);">
+                                <img src="images/pykpykpyk.png" alt="PykPykPyk" class="team-logo">
+                                <span>PykPykPyk</span>
+                            </div>
                         </div>
-                        <div class="match-team-box" style="border-color: rgba(255,42,59,0.5);">
-                            <img src="images/bojlery.png" alt="Bojlery" class="team-logo">
-                            <span>Bojlery</span>
+                        <div class="match-connector">
+                            <svg width="40" height="60" viewBox="0 0 40 60" style="overflow: visible;">
+                                <path d="M 0 12 L 20 12 L 20 30 L 40 30" fill="none" stroke="rgba(255,42,59,0.4)" stroke-width="2"/>
+                                <path d="M 0 48 L 20 48 L 20 30 L 40 30" fill="none" stroke="rgba(255,42,59,0.4)" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div class="match-winner-box" style="opacity: 1; border: 1px solid var(--accent-red); color: #fff; background: rgba(255, 42, 59, 0.08);">
+                            <span style="font-size: 1.1rem; letter-spacing: 1px;">Koniobijcy <strong style="color: var(--accent-red);">0 : 9</strong> PykPykPyk (W/O)</span>
                         </div>
                     </div>
-                    <div class="match-connector">
-                        <svg width="40" height="60" viewBox="0 0 40 60" style="overflow: visible;">
-                            <path d="M 0 12 L 20 12 L 20 30 L 40 30" fill="none" stroke="rgba(255,42,59,0.4)" stroke-width="2"/>
-                            <path d="M 0 48 L 20 48 L 20 30 L 40 30" fill="none" stroke="rgba(255,42,59,0.4)" stroke-width="2"/>
-                        </svg>
+
+                    <!-- MECZ 2 (KOLEJKA 1) -->
+                    <div class="match-card-layout" style="border-color: var(--accent-red);">
+                        <div class="match-teams-column">
+                            <div class="match-team-box">
+                                <img src="images/tutusie.png" alt="Tutusie" class="team-logo">
+                                <span>Tutusie</span>
+                            </div>
+                            <div class="match-team-box" style="border-color: rgba(255,42,59,0.5);">
+                                <img src="images/psi_patrol.png" alt="Psi Patrol" class="team-logo">
+                                <span>Psi Patrol</span>
+                            </div>
+                        </div>
+                        <div class="match-connector">
+                            <svg width="40" height="60" viewBox="0 0 40 60" style="overflow: visible;">
+                                <path d="M 0 12 L 20 12 L 20 30 L 40 30" fill="none" stroke="rgba(255,42,59,0.4)" stroke-width="2"/>
+                                <path d="M 0 48 L 20 48 L 20 30 L 40 30" fill="none" stroke="rgba(255,42,59,0.4)" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div class="match-winner-box" style="opacity: 1; border: 1px solid var(--accent-red); color: #fff; background: rgba(255, 42, 59, 0.08);">
+                            <span style="font-size: 1.1rem; letter-spacing: 1px;">Tutusie <strong style="color: var(--accent-red);">2 : 9</strong> Psi Patrol</span>
+                        </div>
                     </div>
-                    <div class="match-winner-box" style="opacity: 1; border: 1px solid var(--accent-red); color: #fff; background: rgba(255, 42, 59, 0.08);">
-                        <span style="font-size: 1.1rem; letter-spacing: 1px;">Tutusie <strong style="color: var(--accent-red);">2 : 9</strong> Bojlery</span>
+
+                    <!-- MECZ 3 (KOLEJKA 1) -->
+                    <div class="match-card-layout" style="border-color: var(--accent-red);">
+                        <div class="match-teams-column">
+                            <div class="match-team-box" style="border-color: rgba(255,42,59,0.5);">
+                                <img src="images/zypiekanka.png" alt="Żypiekanka" class="team-logo">
+                                <span>Żypiekanka</span>
+                            </div>
+                            <div class="match-team-box">
+                                <img src="images/podopieczni.png" alt="Podopieczni" class="team-logo">
+                                <span>Podopieczni</span>
+                            </div>
+                        </div>
+                        <div class="match-connector">
+                            <svg width="40" height="60" viewBox="0 0 40 60" style="overflow: visible;">
+                                <path d="M 0 12 L 20 12 L 20 30 L 40 30" fill="none" stroke="rgba(255,42,59,0.4)" stroke-width="2"/>
+                                <path d="M 0 48 L 20 48 L 20 30 L 40 30" fill="none" stroke="rgba(255,42,59,0.4)" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div class="match-winner-box" style="opacity: 1; border: 1px solid var(--accent-red); color: #fff; background: rgba(255, 42, 59, 0.08);">
+                            <span style="font-size: 1.1rem; letter-spacing: 1px;">Żypiekanka <strong style="color: var(--accent-red);">11 : 8</strong> Podopieczni</span>
+                        </div>
+                    </div>
+
+                    <!-- MECZ 4 (KOLEJKA 1) -->
+                    <div class="match-card-layout" style="border-color: var(--accent-red);">
+                        <div class="match-teams-column">
+                            <div class="match-team-box" style="border-color: rgba(255,42,59,0.5);">
+                                <img src="images/vendetta.png" alt="Vendetta" class="team-logo">
+                                <span>Vendetta</span>
+                            </div>
+                            <div class="match-team-box">
+                                <img src="images/chlopaki_z_premki.png" alt="Chłopaki z premki" class="team-logo">
+                                <span>Chłopaki z premki</span>
+                            </div>
+                        </div>
+                        <div class="match-connector">
+                            <svg width="40" height="60" viewBox="0 0 40 60" style="overflow: visible;">
+                                <path d="M 0 12 L 20 12 L 20 30 L 40 30" fill="none" stroke="rgba(255,42,59,0.4)" stroke-width="2"/>
+                                <path d="M 0 48 L 20 48 L 20 30 L 40 30" fill="none" stroke="rgba(255,42,59,0.4)" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div class="match-winner-box" style="opacity: 1; border: 1px solid var(--accent-red); color: #fff; background: rgba(255, 42, 59, 0.08);">
+                            <span style="font-size: 1.1rem; letter-spacing: 1px;">Vendetta <strong style="color: var(--accent-red);">9 : 4</strong> Chłopaki z premki</span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- MECZ 3 -->
-                <div class="match-card-layout" style="border-color: var(--accent-red);">
-                    <div class="match-teams-column">
-                        <div class="match-team-box" style="border-color: rgba(255,42,59,0.5);">
-                            <img src="images/zypiekanka.png" alt="Żypiekanka" class="team-logo">
-                            <span>Żypiekanka</span>
+                <!-- KOLEJKA 2 CONTENT -->
+                <div id="kolejka-2" class="kolejka-content" style="display: block;">
+                    <!-- MECZ 1 (KOLEJKA 2) -->
+                    <div class="match-card-layout">
+                        <div class="match-teams-column">
+                            <div class="match-team-box">
+                                <img src="images/koniobijcy.png" alt="Koniobijcy" class="team-logo">
+                                <span>Koniobijcy</span>
+                            </div>
+                            <div class="match-team-box">
+                                <img src="images/psi_patrol.png" alt="Psi Patrol" class="team-logo">
+                                <span>Psi Patrol</span>
+                            </div>
                         </div>
-                        <div class="match-team-box">
-                            <img src="images/podopieczni.png" alt="Podopieczni" class="team-logo">
-                            <span>Podopieczni</span>
+                        <div class="match-connector">
+                            <svg width="40" height="60" viewBox="0 0 40 60" style="overflow: visible;">
+                                <path d="M 0 12 L 20 12 L 20 30 L 40 30" fill="none" stroke="rgba(255,42,59,0.4)" stroke-width="2"/>
+                                <path d="M 0 48 L 20 48 L 20 30 L 40 30" fill="none" stroke="rgba(255,42,59,0.4)" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div class="match-winner-box">
+                            <i class="fa-solid fa-clock"></i> Do rozegrania
                         </div>
                     </div>
-                    <div class="match-connector">
-                        <svg width="40" height="60" viewBox="0 0 40 60" style="overflow: visible;">
-                            <path d="M 0 12 L 20 12 L 20 30 L 40 30" fill="none" stroke="rgba(255,42,59,0.4)" stroke-width="2"/>
-                            <path d="M 0 48 L 20 48 L 20 30 L 40 30" fill="none" stroke="rgba(255,42,59,0.4)" stroke-width="2"/>
-                        </svg>
-                    </div>
-                    <div class="match-winner-box" style="opacity: 1; border: 1px solid var(--accent-red); color: #fff; background: rgba(255, 42, 59, 0.08);">
-                        <span style="font-size: 1.1rem; letter-spacing: 1px;">Żypiekanka <strong style="color: var(--accent-red);">11 : 8</strong> Podopieczni</span>
-                    </div>
-                </div>
 
-                <!-- MECZ 4 -->
-                <div class="match-card-layout" style="border-color: var(--accent-red);">
-                    <div class="match-teams-column">
-                        <div class="match-team-box" style="border-color: rgba(255,42,59,0.5);">
-                            <img src="images/vendetta.png" alt="Vendetta" class="team-logo">
-                            <span>Vendetta</span>
+                    <!-- MECZ 2 (KOLEJKA 2) -->
+                    <div class="match-card-layout" style="border-color: var(--accent-red);">
+                        <div class="match-teams-column">
+                            <div class="match-team-box">
+                                <img src="images/pykpykpyk.png" alt="PykPykPyk" class="team-logo">
+                                <span>PykPykPyk</span>
+                            </div>
+                            <div class="match-team-box" style="border-color: rgba(255,42,59,0.5);">
+                                <img src="images/podopieczni.png" alt="Podopieczni" class="team-logo">
+                                <span>Podopieczni</span>
+                            </div>
                         </div>
-                        <div class="match-team-box">
-                            <img src="images/chlopaki_z_premki.png" alt="Chłopaki z premki" class="team-logo">
-                            <span>Chłopaki z premki</span>
+                        <div class="match-connector">
+                            <svg width="40" height="60" viewBox="0 0 40 60" style="overflow: visible;">
+                                <path d="M 0 12 L 20 12 L 20 30 L 40 30" fill="none" stroke="rgba(255,42,59,0.4)" stroke-width="2"/>
+                                <path d="M 0 48 L 20 48 L 20 30 L 40 30" fill="none" stroke="rgba(255,42,59,0.4)" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div class="match-winner-box" style="opacity: 1; border: 1px solid var(--accent-red); color: #fff; background: rgba(255, 42, 59, 0.08);">
+                            <span style="font-size: 1.1rem; letter-spacing: 1px;">PykPykPyk <strong style="color: var(--accent-red);">0 : 9</strong> Podopieczni</span>
                         </div>
                     </div>
-                    <div class="match-connector">
-                        <svg width="40" height="60" viewBox="0 0 40 60" style="overflow: visible;">
-                            <path d="M 0 12 L 20 12 L 20 30 L 40 30" fill="none" stroke="rgba(255,42,59,0.4)" stroke-width="2"/>
-                            <path d="M 0 48 L 20 48 L 20 30 L 40 30" fill="none" stroke="rgba(255,42,59,0.4)" stroke-width="2"/>
-                        </svg>
+
+                    <!-- MECZ 3 (KOLEJKA 2) -->
+                    <div class="match-card-layout">
+                        <div class="match-teams-column">
+                            <div class="match-team-box">
+                                <img src="images/tutusie.png" alt="Tutusie" class="team-logo">
+                                <span>Tutusie</span>
+                            </div>
+                            <div class="match-team-box">
+                                <img src="images/chlopaki_z_premki.png" alt="Chłopaki z premki" class="team-logo">
+                                <span>Chłopaki z premki</span>
+                            </div>
+                        </div>
+                        <div class="match-connector">
+                            <svg width="40" height="60" viewBox="0 0 40 60" style="overflow: visible;">
+                                <path d="M 0 12 L 20 12 L 20 30 L 40 30" fill="none" stroke="rgba(255,42,59,0.4)" stroke-width="2"/>
+                                <path d="M 0 48 L 20 48 L 20 30 L 40 30" fill="none" stroke="rgba(255,42,59,0.4)" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div class="match-winner-box">
+                            <i class="fa-solid fa-clock"></i> Do rozegrania
+                        </div>
                     </div>
-                    <div class="match-winner-box" style="opacity: 1; border: 1px solid var(--accent-red); color: #fff; background: rgba(255, 42, 59, 0.08);">
-                        <span style="font-size: 1.1rem; letter-spacing: 1px;">Vendetta <strong style="color: var(--accent-red);">9 : 4</strong> Chłopaki z premki</span>
+
+                    <!-- MECZ 4 (KOLEJKA 2) -->
+                    <div class="match-card-layout" style="border-color: var(--accent-red);">
+                        <div class="match-teams-column">
+                            <div class="match-team-box">
+                                <img src="images/zypiekanka.png" alt="Żypiekanka" class="team-logo">
+                                <span>Żypiekanka</span>
+                            </div>
+                            <div class="match-team-box" style="border-color: rgba(255,42,59,0.5);">
+                                <img src="images/vendetta.png" alt="Vendetta" class="team-logo">
+                                <span>Vendetta</span>
+                            </div>
+                        </div>
+                        <div class="match-connector">
+                            <svg width="40" height="60" viewBox="0 0 40 60" style="overflow: visible;">
+                                <path d="M 0 12 L 20 12 L 20 30 L 40 30" fill="none" stroke="rgba(255,42,59,0.4)" stroke-width="2"/>
+                                <path d="M 0 48 L 20 48 L 20 30 L 40 30" fill="none" stroke="rgba(255,42,59,0.4)" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div class="match-winner-box" style="opacity: 1; border: 1px solid var(--accent-red); color: #fff; background: rgba(255, 42, 59, 0.08);">
+                            <span style="font-size: 1.1rem; letter-spacing: 1px;">Żypiekanka <strong style="color: var(--accent-red);">0 : 9</strong> Vendetta</span>
+                        </div>
                     </div>
                 </div>
 
@@ -1115,6 +1265,18 @@
             event.currentTarget.classList.add('active');
         }
 
+        function switchKolejka(num) {
+            const contents = document.querySelectorAll('.kolejka-content');
+            contents.forEach(content => content.style.display = 'none');
+
+            const buttons = document.querySelectorAll('.kolejka-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById('kolejka-' + num).style.display = 'block';
+            document.getElementById('kolejka-btn-' + num).classList.add('active');
+            document.getElementById('kolejka-title').textContent = 'KOLEJKA ' + num;
+        }
+
         function filterTeams() {
             const input = document.getElementById("teamSearch");
             const filter = input.value.toUpperCase();
@@ -1149,29 +1311,28 @@
                 row.querySelector(".pts").textContent = points;
             });
 
-            // Sortowanie:
-            // 1. Punkty (malejąco)
-            // 2. Kara za Walkover (drużyna z data-wo="true" spada na koniec wśród drużyn o tej samej liczbie pkt)
+            // Dynamiczne sortowanie według punktów oraz zwycięstw
             rows.sort((a, b) => {
+                const matchesA = parseInt(a.querySelector(".matches").textContent) || 0;
+                const matchesB = parseInt(b.querySelector(".matches").textContent) || 0;
                 const ptsA = parseInt(a.querySelector(".pts").textContent) || 0;
                 const ptsB = parseInt(b.querySelector(".pts").textContent) || 0;
+                const winsA = parseInt(a.querySelector(".wins").textContent) || 0;
+                const winsB = parseInt(b.querySelector(".wins").textContent) || 0;
 
-                if (ptsA !== ptsB) return ptsB - ptsA;
+                if (matchesA > 0 && matchesB === 0) return -1;
+                if (matchesA === 0 && matchesB > 0) return 1;
 
-                const woA = a.getAttribute("data-wo") === "true" ? 1 : 0;
-                const woB = b.getAttribute("data-wo") === "true" ? 1 : 0;
-
-                return woA - woB; // 0 (bez W/O) wyżej niż 1 (z W/O)
+                if (ptsB !== ptsA) return ptsB - ptsA;
+                return winsB - winsA;
             });
 
             rows.forEach((row, index) => {
                 const posCell = row.querySelector(".pos");
                 const teamCell = row.querySelector("td:nth-child(2) .team-info");
                 
-                // Reset klas
                 posCell.className = "pos";
                 
-                // Usunięcie starych odznak
                 const existingBadge = teamCell.querySelector(".qualifier-badge");
                 if (existingBadge) {
                     existingBadge.remove();
@@ -1181,7 +1342,6 @@
                     posCell.classList.add("pos-yellow");
                     posCell.textContent = index + 1;
 
-                    // Odznaka awansu do Playoffów
                     const badge = document.createElement("span");
                     badge.className = "qualifier-badge";
                     badge.textContent = "Playoff Qualifier";
